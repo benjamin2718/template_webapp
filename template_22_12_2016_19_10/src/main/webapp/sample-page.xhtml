@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<!-- 	<f:loadBundle basename="msg" var="msg" /> -->
+<h:head>
+	<title><h:outputText value="#{msg['titre']}"></h:outputText></title>
+</h:head>
+<h:body>
+
+	<ui:composition template="WEB-INF/templates/template1.xhtml">
+		<ui:define name="header">
+			<h1>
+				<h:outputText value="#{msg['titre']}"></h:outputText>
+			</h1>
+		</ui:define>
+		<ui:define name="footer">
+
+
+			<p>
+				<h:outputText value="#{msg['nombreAléaoire']}"></h:outputText>
+				#{numGenerator1.randomNum}
+			</p>
+			<h:form>
+				<h:commandLink action="#{language.activerFR}" immediate="true">FR</h:commandLink>
+
+
+				<h:commandLink action="#{language.activerEN}" immediate="true">EN</h:commandLink>
+
+				<h:commandLink action="#{language.activerCH}" immediate="true">CH</h:commandLink>
+
+				<br />
+				<h:inputText value="#{helloBean.name}"
+					requiredMessage="#{msg['avertissement']}" required="true"></h:inputText>
+				<!-- <f:validateLength minimum="5" maximum="12" /> -->
+				<h:commandButton value="#{msg['valider']}" action="welcome"></h:commandButton>
+
+
+				<p:editor id="editor" widgetVar="editorWidget"
+					value="#{editorBean.text}" width="600" />
+
+				<h:panelGrid columns="2" style="margin-top: 10px">
+					<p:commandButton value="Submit" update="display"
+						oncomplete="PF('dlg').show()" icon="ui-icon-disk" />
+					<p:commandButton value="Clear" type="button"
+						onclick="PF('editorWidget').clear();" icon="ui-icon-close" />
+
+
+
+				</h:panelGrid>
+				<p:dialog header="Content" widgetVar="dlg" showEffect="fade"
+					hideEffect="fade">
+					<h:outputText id="display" value="#{editorBean.text}"
+						escape="false" />
+				</p:dialog>
+			</h:form>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+
+</html>
